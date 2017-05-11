@@ -25,6 +25,15 @@ ENV COMPOSER_HOME /root/composer
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Install Node
+RUN NODE_VERSION=6.9.5 \
+    && NPM_VERSION=$(curl https://semver.io/npm/stable) \
+    && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
+    && tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
+    && rm "node-v$NODE_VERSION-linux-x64.tar.gz" \
+    && npm install -g npm@"$NPM_VERSION" \
+    && npm cache clear
+
 RUN docker-php-ext-install \
     bcmath \
     bz2 \
@@ -39,6 +48,3 @@ RUN docker-php-ext-install \
     intl
 
 CMD ["php"]
-
-FROM node:6.9.5-slim
-CMD ["npm"]
