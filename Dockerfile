@@ -40,6 +40,5 @@ RUN docker-php-ext-install \
 
 CMD ["php"]
 
-FROM node:6.9.5-onbuild
-
+FROM node:6.9.5-slim
 CMD ["npm"]
