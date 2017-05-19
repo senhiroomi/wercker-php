@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
 	libbz2-dev \
 	openssl libssl-dev \
 	libicu-dev \
+        libpcre3-dev \
 	curl \
 	git \
     && docker-php-ext-install iconv mcrypt \
